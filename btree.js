@@ -21,16 +21,7 @@ bTree.prototype.insert = function(num){
   }
 
   if (this.node.length > this.m && this.isRoot){
-    var mid = Math.floor(this.node.length/2)
-    var leftNode = this.node.splice(0,mid)
-    var rightNode = this.node.splice(1, this.node.length)
-    leftTree = new bTree(true)
-    rightTree = new bTree(true)
-    leftTree.node = leftNode
-    rightTree.node = rightNode
-    this.node[0].leftEdge = leftTree
-    this.node[0].rightEdge = rightTree
-    this.isLeaf = false
+    this.newRoot()
   }
 }
 
@@ -59,6 +50,21 @@ bTree.prototype.insertIntoLeafNode = function(num){
     }
   }
 
+}
+
+bTree.prototype.newRoot = function(){
+  var mid = Math.floor(this.node.length/2)
+  var leftNode = this.node.splice(0,mid)
+  var rightNode = this.node.splice(1, this.node.length)
+  leftTree = new bTree(true)
+  leftTree.upNode = this
+  rightTree = new bTree(true)
+  rightTree.upNode = this
+  leftTree.node = leftNode
+  rightTree.node = rightNode
+  this.node[0].leftEdge = leftTree
+  this.node[0].rightEdge = rightTree
+  this.isLeaf = false
 }
 
 
