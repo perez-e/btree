@@ -15,13 +15,36 @@ function Key(value) {
 }
 
 bTree.prototype.insert = function(num){
-  console.log(this)
+ 
   if ( this.isLeaf ) {
     this.insertIntoLeafNode(num)
   }
 
+  if ( !this.isLeaf ) {
+    this.transverseTree(num)
+  }
+
   if (this.node.length > this.m && this.isRoot){
     this.newRoot()
+  }
+}
+
+bTree.prototype.transverseTree = function(num){
+  if (num < this.node[0].value) {
+    this.node[0].leftEdge.insert(num)
+    return
+  }
+
+  if (num >= this.node[this.node.length-1].value) {
+    this.node[this.node.length-1].rightEdge.insert(num)
+    return
+  }
+
+  for (var i = 0; i < this.node.length - 1; i++ ){
+    if (num >= this.node[i].value && num < this.node[i+1].value) {
+      this.node[i].rightEdge.insert(num)
+      return
+    }
   }
 }
 
