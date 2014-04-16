@@ -155,8 +155,15 @@ bTree.prototype.newRoot = function(){
   leftTree.node = leftNode;
   rightTree.node = rightNode;
 
+  // if the root is not a leaf then the following node should not be leaves
+  if ( !this.isLeaf ){
+    leftTree.isLeaf = false
+    rightTree.isLeaf = false
+  }
+
   // associate left and right edge of only key in root node to left and right b-tree structures
   this.node[0].leftEdge = leftTree;
   this.node[0].rightEdge = rightTree;
   this.isLeaf = false;
 };
+
