@@ -157,8 +157,8 @@ bTree.prototype.newRoot = function(){
 
   // if the root is not a leaf then the following node should not be leaves
   if ( !this.isLeaf ){
-    leftTree.isLeaf = false
-    rightTree.isLeaf = false
+    leftTree.isLeaf = false;
+    rightTree.isLeaf = false;
   }
 
   // associate left and right edge of only key in root node to left and right b-tree structures
@@ -166,4 +166,22 @@ bTree.prototype.newRoot = function(){
   this.node[0].rightEdge = rightTree;
   this.isLeaf = false;
 };
+
+bTree.prototype.printTree = function(){
+  if ( this.isLeaf ){
+    for (var i = 0; i < this.node.length; i++){
+      console.log(this.node[i].value);
+    }
+    return;
+  }
+
+  for (var i = 0; i < this.node.length; i++){
+    this.node[i].leftEdge.printTree()
+    console.log(this.node[i].value)
+  }
+
+  this.node[this.node.length-1].rightEdge.printTree()
+
+}
+
 
