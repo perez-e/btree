@@ -188,4 +188,17 @@ bTree.prototype.printTree = function(){
 
 }
 
+bTree.prototype.height = function(count){
+  // initialize count if not passed in as arguement
+  count = count || 0
+
+  // if leaf node reached return count
+  if ( this.isLeaf ){
+    return count
+  }
+
+  // increment count and transverse further into tree
+  count ++
+  return this.node[0].leftEdge.height(count)
+}
 
