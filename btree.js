@@ -167,7 +167,9 @@ bTree.prototype.newRoot = function(){
   this.isLeaf = false;
 };
 
+// print key values in ascending order
 bTree.prototype.printTree = function(){
+  // if node is leaf print key values
   if ( this.isLeaf ){
     for (var i = 0; i < this.node.length; i++){
       console.log(this.node[i].value);
@@ -175,11 +177,13 @@ bTree.prototype.printTree = function(){
     return;
   }
 
+  // transverse further into tree through left edge before printing each key value
   for (var i = 0; i < this.node.length; i++){
     this.node[i].leftEdge.printTree()
     console.log(this.node[i].value)
   }
 
+  // transverse right edge of last key in node
   this.node[this.node.length-1].rightEdge.printTree()
 
 }
